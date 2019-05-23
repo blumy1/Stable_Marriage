@@ -1,28 +1,25 @@
 import net.sourceforge.gxl.GXLEdge;
 import net.sourceforge.gxl.GXLNode;
 
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+
 public class Person {
     private String name;
     private String partner;
-    private String[] possibilities;
-    private int currentPos;
+    private LinkedHashSet<String> possibilities;
 
-    public Person(String name, String[] possibilities) {
+    public Person(String name, LinkedHashSet<String> possibilities) {
         this.name = name;
         this.possibilities = possibilities;
-        this.currentPos = 0;
     }
 
     public String getName() {
         return name;
     }
 
-    public String[] getPossibilities() {
+    public LinkedHashSet<String> getPossibilities() {
         return possibilities;
-    }
-
-    public int getCurrentPos() {
-        return currentPos;
     }
 
     public String getPartner() {
@@ -31,42 +28,29 @@ public class Person {
 
     public void setPartner(String partner) {
         this.partner = partner;
-        for (int i=0; i<possibilities.length; i++) {
-            if (possibilities[i] != null && possibilities[i].equals(partner))
-                currentPos = i;
-        }
-    }
-
-    public void setCurrentPos(int currentPos) {
-        this.currentPos = currentPos;
     }
 
     public String getNextPossibility() {
-        for (int i=currentPos; i<possibilities.length; i++) {
-            if (possibilities[i] != null) {
-                this.currentPos = i;
-                return possibilities[i];
-            }
-        }
-        return null;
+        return possibilities.iterator().next();
     }
 
     public void removePossibility(String name) {
-        for (int i=0; i<possibilities.length; i++) {
-            if (possibilities[i] != null && possibilities[i].equals(name)) {
-                possibilities[i] = null;
-            }
-        }
+        possibilities.remove(name);
     }
 
     public boolean isBetterPartner(String name) {
         if (partner == null) return true;
 
-        for (int i=0; i<currentPos; i++) {
-            if (possibilities[i] != null && possibilities[i].equals(name))
+        Iterator<String> iterator = possibilities.iterator();
+        while (iterator.hasNext()) {
+            String possibility = iterator.next();
+            if (possibility.equals(partner))
+                return false;
+
+            if (possibility.equals(name))
                 return true;
         }
-        return false;
+        return true;
     }
 
     public GXLNode toNode() {

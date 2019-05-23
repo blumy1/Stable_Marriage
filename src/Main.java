@@ -10,7 +10,7 @@ public class Main {
             return;
         }
 
-        StableMarriage marriage = new StableMarriage(Mock.getWomen1(), Mock.getMen1());
+        StableMarriage marriage = new StableMarriage(Mock.getWomen1Strings(), Mock.getMen1Strings());
         marriage.printPossibilities();
         marriage.connectPeople();
         System.out.println();

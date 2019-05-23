@@ -1,3 +1,5 @@
+import java.util.LinkedHashSet;
+
 public class Rating implements Comparable<Rating>{
     private String name;
     private double rating;
@@ -22,10 +24,10 @@ public class Rating implements Comparable<Rating>{
         return 0;
     }
 
-    public static String[] getNames(Rating[] ratings) {
-        String[] people = new String[ratings.length];
-        for (int i=0; i<ratings.length; i++) {
-            people[i] = ratings[i].getName();
+    public static LinkedHashSet<String> getNames(Rating[] ratings) {
+        LinkedHashSet<String> people = new LinkedHashSet<>(ratings.length);
+        for (Rating value : ratings) {
+            people.add(value.getName());
         }
         return people;
     }
