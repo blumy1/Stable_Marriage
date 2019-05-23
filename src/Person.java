@@ -1,3 +1,6 @@
+import net.sourceforge.gxl.GXLEdge;
+import net.sourceforge.gxl.GXLNode;
+
 public class Person {
     private String name;
     private String partner;
@@ -64,5 +67,13 @@ public class Person {
                 return true;
         }
         return false;
+    }
+
+    public GXLNode toNode() {
+        return new GXLNode(name);
+    }
+
+    public GXLEdge getEdge() {
+        return new GXLEdge(name, partner);
     }
 }

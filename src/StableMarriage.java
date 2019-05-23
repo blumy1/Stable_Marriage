@@ -1,3 +1,5 @@
+import net.sourceforge.gxl.GXLGraph;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -53,11 +55,54 @@ public class StableMarriage {
         }
     }
 
+    public GXLGraph asGraph() {
+        GXLGraph gxlGraph = new GXLGraph("Marriage");
+        for (Map.Entry<String, Person> entry : women.entrySet()) {
+            Person person = entry.getValue();
+            gxlGraph.add(person.toNode());
+        }
+
+        for (Map.Entry<String, Person> entry : men.entrySet()) {
+            Person person = entry.getValue();
+            gxlGraph.add(person.toNode());
+        }
+
+        for (Map.Entry<String, Person> entry : women.entrySet()) {
+            Person person = entry.getValue();
+            gxlGraph.add(person.getEdge());
+        }
+
+        return gxlGraph;
+    }
+
     public LinkedHashMap<String, Person> getWomen() {
         return women;
     }
 
     public LinkedHashMap<String, Person> getMen() {
         return men;
+    }
+
+    public void printPossibilities() {
+        printPossibility(women);
+        System.out.println();
+        printPossibility(men);
+    }
+
+    private void printPossibility(LinkedHashMap<String, Person> people) {
+        for (Map.Entry<String, Person> entry : people.entrySet()) {
+            Person person = entry.getValue();
+            System.out.print(person.getName() + ":");
+            for (String possibility : person.getPossibilities()) {
+                System.out.print(" " + possibility);
+            }
+            System.out.println();
+        }
+    }
+
+    public void printMarriages() {
+        for (Map.Entry<String, Person> woman : women.entrySet()) {
+            System.out.println(woman.getValue().getName() + " - " + woman.getValue().getPartner());
+        }
     }
 }
