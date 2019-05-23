@@ -1,5 +1,6 @@
 import net.sourceforge.gxl.GXLGraph;
 
+import java.text.DecimalFormat;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -19,9 +20,16 @@ public class StableMarriage {
 
     private LinkedHashMap<String, Person> createPeople(String[] group1, String[] group2) {
         LinkedHashMap<String, Person> people = new LinkedHashMap<>(group1.length);
+        System.out.println();
         for (int i=0; i<group1.length; i++) {
             Rating[] ratings = Randomizer.getPersonRatings(group2);
-            people.put(group1[i],  new Person(group1[i], Rating.getNames(ratings)));
+            System.out.print(group1[i] + ":");
+            for (Rating rating : ratings) {
+                DecimalFormat df = new DecimalFormat("#.##");
+                System.out.print(" " + rating.getName() + " (" + df.format(rating.getRating()) + ")");
+            }
+            System.out.println();
+            people.put(group1[i], new Person(group1[i], Rating.getNames(ratings)));
         }
         return people;
     }

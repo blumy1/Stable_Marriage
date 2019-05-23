@@ -11,7 +11,7 @@ public class Main {
         }
 
         StableMarriage marriage = new StableMarriage(Mock.getWomen1Strings(), Mock.getMen1Strings());
-        marriage.printPossibilities();
+//        marriage.printPossibilities();
         marriage.connectPeople();
         System.out.println();
         marriage.printMarriages();

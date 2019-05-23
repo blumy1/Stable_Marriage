@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Stable_Marriage:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Stable_Marriage_jar</output-path>
+    <root id="archive" name="Stable_Marriage.jar">
+      <element id="module-output" name="Stable_Marriage" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/gxl.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
